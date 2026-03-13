@@ -1,0 +1,27 @@
+namespace: demo
+
+replicaCount: 3
+
+image:
+  repository: my-node-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+config:
+  APP_NAME: "node-helm-app"
+  APP_ENV: "development"
+
+secret:
+  DB_USER: "admin"
+  DB_PASSWORD: "supersecret"
+
+cronjob:
+  enabled: true
+  schedule: "*/1 * * * *"   # every minute (for learning)
+  command:
+    - node
+    - app/report.js

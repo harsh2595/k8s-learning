@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}  
+    spec:
+      volumes:
+        - name: app-logs
+          emptyDir: {}
+        - name: app-storage                  # <-- PVC volume added
+          persistentVolumeClaim:
+            claimName: {{ .Chart.Name }}-pvc # <-- pass PVC name via values.yaml
+      serviceAccountName: {{ .Chart.Name }}-sa      
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: app-logs
+              mountPath: /var/log/app
+            - name: app-storage              # <-- mount PVC inside container
+              mountPath: /data               # <-- path inside container
+          resources:
+           requests:
+            cpu: "100m"
+            memory: "128Mi"
+           limits:
+            cpu: "500m"
+            memory: "256Mi"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - exit 0
+            preStop:
+             exec:
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "🛑 preStop hook triggered" 
+                  sleep 5
+          # command: ["node"]
+          # args:
+          #   - "-e"
+          #   - |
+          #     const http = require('http');
+          #     const port = 3000;
+          #     http.createServer((req, res) => {
+          #       res.writeHead(200, {'Content-Type': 'application/json'});
+          #       res.end(JSON.stringify({
+          #         app: process.env.APP_NAME,
+          #         env: process.env.APP_ENV,
+          #         db_user: process.env.DB_USER
+          #       }));
+          #     }).listen(port);
+              
+          ports:
+            - containerPort: 3000
+
+          startupProbe:
+              httpGet:
+                path: /health
+                port: 3000
+              failureThreshold: 30   # 30 × 5s = 150 seconds max startup
+              periodSeconds: 5
+
+          readinessProbe:
+             httpGet:
+               path: /ready
+               port: 3000
+             initialDelaySeconds: 5
+             periodSeconds: 5
+
+          livenessProbe:
+             httpGet:
+               path: /health
+               port: 3000
+             initialDelaySeconds: 15
+             periodSeconds: 10
+          
+          envFrom:
+            - configMapRef:
+                name: {{ .Chart.Name }}-config
+            - secretRef:
+                name: {{ .Chart.Name }}-secret

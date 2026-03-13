@@ -1,0 +1,13 @@
+{
+    "name": "node-app2-helm",
+    "version": "1.0.0",
+    "description": "Node.js app with Kubernetes CronJob using Helm",
+    "main": "app/server.js",
+    "scripts": {
+        "start": "node app/server.js",
+        "report": "node app/report.js"
+    },
+    "dependencies": {
+        "express": "^4.19.2"
+    }
+}
