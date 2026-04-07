@@ -1,129 +1,176 @@
-🚀 Kubernetes (K8s) Hands-on Learning | DevOps Portfolio Project
+# ☸️ Kubernetes Learning (k8s-learning)
 
-This repository demonstrates my practical Kubernetes skills through hands-on implementation of core concepts, deployment strategies, and real-world DevOps practices.
+A hands-on repository to **learn Kubernetes from scratch to advanced level**, covering core concepts, practical implementations, and real-world DevOps use cases.
 
-It is designed to reflect how I build, deploy, manage, and troubleshoot containerized applications in a production-like environment.
+This project is designed as a **learning journey + practical lab environment** to help you understand Kubernetes deeply through examples and experiments.
 
-🔗 Repository
+---
 
-👉 https://github.com/harsh2595/k8s-learning
+## 🚀 About the Project
 
-👨‍💻 About Me
-Harsh Kashyap — DevOps Engineer
+This repository contains structured notes, YAML configurations, and practical exercises to master Kubernetes concepts such as:
 
-4.7+ years total experience (QA + DevOps)
-Hands-on with AWS, Docker, Kubernetes, Terraform, CI/CD
-Experience deploying applications, monitoring systems, and automating infrastructure
-Actively seeking DevOps Engineer / Cloud Engineer roles (Remote / International)
+* Pods, Deployments, Services
+* Networking & Ingress
+* ConfigMaps & Secrets
+* Volumes & Persistent Storage
+* RBAC & Security
+* Monitoring & Observability
 
-🎯 Project Objective
-Demonstrate real-world Kubernetes expertise
-Showcase DevOps mindset (automation, scalability, reliability)
-Build production-ready deployment understanding
-Strengthen skills for cloud-native environments
+Kubernetes is a powerful container orchestration platform that manages containerized applications across clusters efficiently. ([GitHub Wiki Search][1])
 
-🧠 Core Skills Demonstrated
-🔹 Kubernetes Fundamentals
-Pods, ReplicaSets, Deployments
-Namespaces for isolation
-Service types (ClusterIP, NodePort, LoadBalancer)
+---
 
-🔹 Configuration Management
-ConfigMaps & Secrets
-Environment-based configuration handling
+## 📚 Learning Objectives
 
-🔹 Storage & Networking
-Persistent Volumes & Claims
-Service discovery & internal networking
+* Understand Kubernetes architecture (Control Plane & Nodes)
+* Deploy and manage applications using YAML
+* Work with Kubernetes resources like Pods, Services, Deployments
+* Learn scaling, rolling updates, and self-healing
+* Implement networking and service exposure
+* Practice real-world DevOps scenarios
 
-🔹 Deployment Strategies
-Rolling Updates & Rollbacks
-Zero-downtime deployments
+---
 
-🔹 Troubleshooting & Debugging
-Pod failures and crash analysis
-Logs, describe, and exec debugging
-Resource monitoring and issue resolution
+## 🛠️ Tools & Technologies
 
-🛠️ Tech Stack
-Kubernetes
-Docker
-kubectl
-Minikube / Kind
-YAML
-Linux
+* Kubernetes (k8s)
+* Docker
+* kubectl
+* Minikube / Kind (for local cluster)
+* YAML
+* Linux
 
-📁 Repository Structure
-k8s-learning/
-│
-├── manifests/        # Core Kubernetes configurations
-├── deployments/      # Deployment YAML files
-├── services/         # Service definitions
-├── volumes/          # Storage configurations
-├── ingress/          # Ingress setup (if implemented)
-├── notes/            # Learning and debugging notes
+---
+
+## 📂 Project Structure
+
+```id="p8v4x1"
+.
+├── basics/            # Core concepts (Pods, Deployments, Services)
+├── networking/        # Services, Ingress, DNS
+├── storage/           # Volumes, PVC, PV
+├── security/          # RBAC, Secrets
+├── monitoring/        # Prometheus / Logging (if included)
+├── manifests/         # YAML files for deployments
 └── README.md
+```
 
-🚀 How to Run (Quick Demo)
+---
 
-# Clone repo
+## ⚙️ Getting Started
+
+### 1️⃣ Clone the Repository
+
+```bash id="n2c8q1"
 git clone https://github.com/harsh2595/k8s-learning.git
 cd k8s-learning
+```
 
-# Start cluster
+---
+
+### 2️⃣ Start a Local Kubernetes Cluster
+
+Using Minikube:
+
+```bash id="k7j2l9"
 minikube start
+```
 
-# Deploy resources
-kubectl apply -f manifests/
+---
 
-# Verify
+### 3️⃣ Apply Kubernetes Manifests
+
+```bash id="f8d3k2"
+kubectl apply -f <file.yaml>
+```
+
+---
+
+### 4️⃣ Verify Resources
+
+```bash id="m1x9p3"
 kubectl get pods
 kubectl get svc
+```
 
-📊 What Makes This Project Valuable
+---
 
-✅ Hands-on Kubernetes implementation
-✅ Real DevOps workflow thinking
-✅ Focus on debugging (important for production roles)
-✅ Clean and structured YAML practices
-✅ Demonstrates deployment lifecycle understanding
+## 🧪 Hands-on Labs
 
-🔍 Sample Use Cases Implemented
-Deploying containerized applications
-Exposing services internally and externally
-Managing configuration securely
-Handling pod failures and recovery
-Scaling applications using Kubernetes
+This repo follows a **learning-by-doing approach**, including:
 
-📈 Future Enhancements (Roadmap)
-CI/CD pipeline integration (GitHub Actions / Jenkins)
-Deployment on AWS EKS
-Monitoring with Prometheus & Grafana
-Helm charts for reusable deployments
-Security (RBAC, Network Policies)
+* Deploy a sample application
+* Scale applications using Deployments
+* Expose apps using Services (ClusterIP, NodePort)
+* Work with ConfigMaps & Secrets
+* Attach Persistent Volumes
+* Implement RBAC policies
+* Monitor applications
 
-💼 Why This Matters for Recruiters
+Hands-on practice is key to mastering Kubernetes concepts effectively. ([GitHub Wiki Search][2])
 
-This project reflects my ability to:
+---
 
-Work with cloud-native technologies
-Understand infrastructure as code
-Handle real deployment challenges
-Follow DevOps best practices
-Learn and implement quickly in practical scenarios
+## 🔥 Key Concepts Covered
 
-📬 Let’s Connect
-Open to DevOps / Cloud Engineer opportunities
-Available for remote roles (global companies)
+### 📦 Workloads
 
-⭐ Support
-If you find this useful:
+* Pods
+* Deployments
+* ReplicaSets
 
-⭐ Star the repo
-🍴 Fork it
+### 🌐 Networking
 
-🤝 Connect with me
-🔥 Future Improvements (Optional Enhancements)
-Include architecture diagrams
-Integrate CI/CD pipelines
-Deploy on cloud (AWS/GCP)
+* Services
+* Ingress
+* DNS
+
+### 💾 Storage
+
+* Persistent Volumes (PV)
+* Persistent Volume Claims (PVC)
+
+### 🔐 Security
+
+* RBAC
+* Secrets Management
+
+---
+
+## 📈 Future Improvements
+
+* Add Helm charts
+* Add CI/CD integration (GitHub Actions)
+* Deploy on AWS EKS
+* Add monitoring with Prometheus & Grafana
+* Add real-world microservices project
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork this repo and submit a pull request.
+
+---
+
+## 👨‍💻 Author
+
+**Harsh Kashyap**
+DevOps Engineer | Kubernetes Enthusiast
+
+---
+
+## ⭐ Support
+
+If this repository helped you, please ⭐ the repo and share with others!
+
+---
+
+## 📌 Notes
+
+This repository is meant for **learning and practice purposes** and will be continuously updated as new concepts are explored.
+
+[1]: https://github-wiki-see.page/m/Mint25/K8s--learning-journey/wiki/Learning-plan-from-Cluade?utm_source=chatgpt.com "Learning plan from Cluade - Mint25/K8s--learning-journey GitHub Wiki"
+[2]: https://github-wiki-see.page/m/Mint25/K8s--learning-journey/wiki/Learning-from-plan-Chatgpt?utm_source=chatgpt.com "Learning from plan Chatgpt - Mint25/K8s--learning-journey GitHub Wiki"
